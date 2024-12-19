@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Time Zones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .time-display {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>World Time Zones</h1>
+    <select id="citySelect" onchange="updateTime()">
+        <option value="UTC">UTC</option>
+        <option value="America/New_York">New York</option>
+        <option value="Europe/London">London</option>
+        <option value="Asia/Tokyo">Tokyo</option>
+        <option value="Australia/Sydney">Sydney</option>
+        <option value="Europe/Berlin">Berlin</option>
+        <option value="America/Los_Angeles">Los Angeles</option>
+        <option value="Asia/Kolkata">Kolkata</option>
+    </select>
+    <div class="time-display" id="timeDisplay"></div>
+</div>
+
+<script>
+    function updateTime() {
+        const citySelect = document.getElementById('citySelect');
+        const selectedCity = citySelect.value;
+        const options = { timeZone: selectedCity, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        const timeString = new Intl.DateTimeFormat([], options).format(new Date());
+        document.getElementById('timeDisplay').innerText = `Current Time: ${timeString}`;
+    }
+
+    // Update time on page load
+    window.onload = updateTime;
+</script>
+
+</body>
+</html>
